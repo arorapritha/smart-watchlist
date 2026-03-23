@@ -5,6 +5,7 @@ import Explore from "./pages/Explore";
 import ForYou from "./pages/ForYou";
 import Watchlist from "./pages/Watchlist";
 import Details from "./pages/Details";
+import Search from "./pages/Search";
 <Route path="/search" element={<Search />} />
 
 export default function App() {
