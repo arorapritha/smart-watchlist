@@ -48,6 +48,7 @@ export async function searchMulti(query) {
   });
   return res.data.results;
 }
+
 export async function getMovieVideos(id) {
   const res = await client.get(`/movie/${id}/videos`);
   return res.data.results;

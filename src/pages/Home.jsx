@@ -49,6 +49,7 @@ export default function Home() {
             backgroundPosition: "center",
             position: "relative",
             marginBottom: "30px",
+            zIndex:1 
           }}
         >
           {/* Gradient overlay */}

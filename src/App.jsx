@@ -6,7 +6,6 @@ import ForYou from "./pages/ForYou";
 import Watchlist from "./pages/Watchlist";
 import Details from "./pages/Details";
 import Search from "./pages/Search";
-<Route path="/search" element={<Search />} />
 
 export default function App() {
   return (
@@ -17,6 +16,7 @@ export default function App() {
         <Route path="/explore" element={<Explore />} />
         <Route path="/for-you" element={<ForYou />} />
         <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/search" element={<Search />} />
         <Route path="/details/:type/:id" element={<Details />} />
       </Routes>
     </BrowserRouter>

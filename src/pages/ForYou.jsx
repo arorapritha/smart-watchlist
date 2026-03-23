@@ -40,11 +40,7 @@ export default function ForYou() {
       <p>Save something first to get recommendations</p>
     ) : (
       <div
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(4, 1fr)",
-          gap: "20px",
-        }}
+        className="content-grid"
       >
         {items.map((item) => (
           <ContentCard key={item.id} item={item} type="movie" />

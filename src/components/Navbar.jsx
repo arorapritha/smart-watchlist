@@ -1,58 +1,75 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
-
 
 export default function Navbar() {
-  const [search, setSearch] = useState("");
+  const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-<input
-  placeholder="Search movies..."
-  onKeyDown={(e) => {
-    if (e.key === "Enter") {
-      navigate(`/search?q=${e.target.value}`);
-    }
-  }}
-  style={searchStyle}
-/>
+  const closeMenu = () => setMenuOpen(false);
+
   return (
     <nav style={navStyle}>
+      {/* LEFT */}
       <h2 style={{ color: "#e50914" }}>Watchlist</h2>
 
-      <div style={{ display: "flex", gap: "20px" }}>
-        <Link to="/" style={linkStyle}>Home</Link>
-        <Link to="/explore" style={linkStyle}>Explore</Link>
-        <Link to="/for-you" style={linkStyle}>For You</Link>
-        <Link to="/watchlist" style={linkStyle}>Watchlist</Link>
+      {/* CENTER LINKS */}
+      <div className="nav-links">
+        <Link to="/">Home</Link>
+        <Link to="/explore">Explore</Link>
+        <Link to="/for-you">For You</Link>
+        <Link to="/watchlist">Watchlist</Link>
       </div>
 
-      {/* SEARCH */}
+      {/* RIGHT SEARCH */}
       <input
-        placeholder="Search movies..."
-        value={search}
-        onChange={(e) => setSearch(e.target.value)}
-        style={searchStyle}
+        placeholder="Search..."
+        className="search-bar"
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && e.target.value.trim()) {
+            navigate(`/search?q=${encodeURIComponent(e.target.value.trim())}`);
+            closeMenu();
+          }
+        }}
       />
+
+      {/* MOBILE ICON */}
+      <button
+        type="button"
+        className="menu-icon"
+        aria-label={menuOpen ? "Close navigation menu" : "Open navigation menu"}
+        aria-expanded={menuOpen}
+        onClick={() => setMenuOpen((open) => !open)}
+      >
+        ☰
+      </button>
+
+      {menuOpen && (
+        <div className="mobile-menu">
+          <Link to="/" onClick={closeMenu}>
+            Home
+          </Link>
+          <Link to="/explore" onClick={closeMenu}>
+            Explore
+          </Link>
+          <Link to="/for-you" onClick={closeMenu}>
+            For You
+          </Link>
+          <Link to="/watchlist" onClick={closeMenu}>
+            Watchlist
+          </Link>
+        </div>
+      )}
     </nav>
   );
 }
 
 const navStyle = {
-  padding: "16px 30px",
+  padding: "16px 20px",
   display: "flex",
-  justifyContent: "space-between",
   alignItems: "center",
+  justifyContent: "space-between",
   background: "#111",
-};
-
-const linkStyle = {
   color: "white",
-};
-
-const searchStyle = {
-  padding: "8px",
-  borderRadius: "6px",
-  border: "1px solid #333",
-  background: "#1a1a1a",
-  color: "white",
+  position: "sticky",
+  top: 0,
+  zIndex: 9999,
 };

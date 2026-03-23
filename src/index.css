@@ -1,3 +1,4 @@
+/* 🌍 GLOBAL STYLES */
 body {
   margin: 0;
   font-family: Arial, sans-serif;
@@ -13,6 +14,15 @@ button {
   cursor: pointer;
 }
 
+h1, h2 {
+  font-weight: 600;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* 🎬 CARD STYLING */
 .card {
   background: #1a1a1a;
   border-radius: 12px;
@@ -24,15 +34,13 @@ button {
   transform: scale(1.05);
 }
 
-h1, h2 {
-  font-weight: 600;
+.content-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 20px;
 }
 
-button:hover {
-  opacity: 0.9;
-}
-
-/* smooth horizontal scroll */
+/* 🖱️ SCROLLBAR */
 ::-webkit-scrollbar {
   height: 6px;
 }
@@ -42,12 +50,138 @@ button:hover {
   border-radius: 10px;
 }
 
+/* 🧭 NAVBAR LINKS (DESKTOP) */
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: white;
+}
+
+/* 🍔 HAMBURGER MENU ICON */
+.menu-icon {
+  font-size: 24px;
+  cursor: pointer;
+  display: none; /* hidden on desktop */
+  background: transparent;
+  border: 0;
+  padding: 0;
+  color: white !important;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.menu-icon:hover {
+  transform: scale(1.2);
+  color: #e50914;
+}
+
+.menu-icon:active {
+  transform: scale(0.9);
+}
+
+/* 📱 MOBILE STYLES */
 @media (max-width: 768px) {
   h1 {
     font-size: 24px;
   }
 
+  .content-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
   .card img {
-    height: 220px;
+    height: 240px;
+  }
+
+  /* hide desktop links */
+  .nav-links {
+    display: none;
+  }
+
+  /* show hamburger */
+  .menu-icon {
+    display: block;
+  }
+
+  /* 📂 MOBILE DROPDOWN MENU */
+  .mobile-menu {
+    position: absolute;
+    top: 60px;
+    right: 15px;
+    background: #111;
+    border: 1px solid #333;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    border-radius: 8px;
+    z-index: 2000;
+    animation: fadeSlide 0.25s ease;
+  }
+
+  .mobile-menu a {
+    color: white;
+    padding: 8px 12px;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+  }
+
+  .mobile-menu a:hover {
+    background: #e50914;
+  }
+}
+
+/* ✨ ANIMATION */
+@keyframes fadeSlide {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.search-bar {
+  width: 220px;
+  padding: 8px 12px;
+  border-radius: 20px;
+  border: 1px solid #444;   /* ✅ visible border */
+  background: transparent;
+  color: white;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+/* 🔥 focus effect */
+.search-bar:focus {
+  border: 1px solid #e50914;
+  background: #1a1a1a;
+}
+
+/* placeholder */
+.search-bar::placeholder {
+  color: #aaa;
+}
+
+/* mobile hide */
+@media (max-width: 768px) {
+  .search-bar {
+    display: none;
+  }
+}
+
+@media (max-width: 480px) {
+  .content-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  .card img {
+    height: 210px;
   }
 }

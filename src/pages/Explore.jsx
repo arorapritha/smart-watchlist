@@ -59,7 +59,7 @@ async function applyFilters() {
   Explore
 </h1>
       <FilterBar filters={filters} setFilters={setFilters} onApply={applyFilters} />
-      <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "20px" }}>
+      <div className="content-grid">
         {items.map((item) => (
           <ContentCard key={item.id} item={item} type="movie" />
         ))}

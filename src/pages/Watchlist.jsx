@@ -22,7 +22,7 @@ export default function Watchlist() {
       {items.length === 0 ? (
         <p>No items saved yet</p>
       ) : (
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: "16px" }}>
+        <div className="content-grid">
           {items.map((item) => (
             <ContentCard key={item.id} item={item} type="movie" />
           ))}
