@@ -22,8 +22,9 @@ export default function Search() {
       <div
         style={{
           display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
+          gridTemplateColumns: "repeat(auto-fill, minmax(180px, 180px))",
           gap: "20px",
+          justifyContent: "start",
         }}
       >
         {results.map((item) => (

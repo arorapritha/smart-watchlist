@@ -1,12 +1,15 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 
-export default function ContentCard({ item, type }) {
+export default function ContentCard({ item, type, onWatchlistChange }) {
   const image = item.poster_path
     ? `https://image.tmdb.org/t/p/w500${item.poster_path}`
     : "";
 
-  const watchlist = JSON.parse(localStorage.getItem("watchlist") || "[]");
-  const isSaved = watchlist.some((x) => x.id === item.id);
+  const [isSaved, setIsSaved] = useState(() => {
+    const watchlist = JSON.parse(localStorage.getItem("watchlist") || "[]");
+    return watchlist.some((x) => x.id === item.id);
+  });
 
   function toggleWatchlist(item) {
     const existing = JSON.parse(localStorage.getItem("watchlist") || "[]");
@@ -21,7 +24,8 @@ export default function ContentCard({ item, type }) {
     }
 
     localStorage.setItem("watchlist", JSON.stringify(updated));
-    window.location.reload();
+    setIsSaved(!alreadyExists);
+    onWatchlistChange?.(updated);
   }
 
   return (

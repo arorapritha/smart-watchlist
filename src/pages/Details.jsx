@@ -13,6 +13,7 @@ export default function Details() {
   const [providers, setProviders] = useState(null);
   const [video, setVideo] = useState(null);
   const [showTrailer, setShowTrailer] = useState(false);
+  const [isSaved, setIsSaved] = useState(false);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -21,10 +22,12 @@ export default function Details() {
       const videos = await getMovieVideos(id);
 
       const trailer = videos.find((v) => v.type === "Trailer");
+      const watchlist = JSON.parse(localStorage.getItem("watchlist") || "[]");
 
       setItem(details);
       setProviders(providerData);
       setVideo(trailer);
+      setIsSaved(watchlist.some((x) => x.id === details.id));
     };
 
     fetchData();
@@ -54,11 +57,8 @@ export default function Details() {
     }
 
     localStorage.setItem("watchlist", JSON.stringify(updated));
-    window.location.reload();
+    setIsSaved(!alreadyExists);
   }
-
-  const watchlist = JSON.parse(localStorage.getItem("watchlist") || "[]");
-  const isSaved = watchlist.some((x) => x.id === item.id);
 
   return (
     <div>

@@ -2,7 +2,7 @@ import { useState } from "react";
 import ContentCard from "../components/ContentCard";
 
 export default function Watchlist() {
-  const [items] = useState(() => {
+  const [items, setItems] = useState(() => {
     const saved = JSON.parse(localStorage.getItem("watchlist") || "[]");
     return saved;
   });
@@ -24,7 +24,12 @@ export default function Watchlist() {
       ) : (
         <div className="content-grid">
           {items.map((item) => (
-            <ContentCard key={item.id} item={item} type="movie" />
+            <ContentCard
+              key={item.id}
+              item={item}
+              type="movie"
+              onWatchlistChange={setItems}
+            />
           ))}
         </div>
       )}
